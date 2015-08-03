@@ -1,15 +1,14 @@
 #!/usr/bin/python
-
+import os
+#os.system("sudo apt-get install python-wnck") #modifica mia
+#os.system("sudo apt-get install python-xlib") #idem
 import commands
 import pygtk
 import sys
 import gobject
 pygtk.require('2.0')
 import base64
-
-import gtk, os
-os.system("sudo apt-get install python-wnck") #modifica mia
-os.system("sudo apt-get install python-xlib") #idem
+import gtk
 import subprocess
 import random
 import xml.dom.minidom
@@ -1045,18 +1044,21 @@ def showMenu(widget,data=None):
 	allchannel = []
 	utente = []
 	menu = gtk.Menu()
-
-	if os.path.exists(homedir+'versione.txt')==False:
-		download("http://ubuntuwin.altervista.org/fileadmin/user_upload/ubuntuwintv/versione.txt","Sto verificando l'esistenza di aggiornamenti","versione.txt")
-		r = open (homedir+'versione.txt','r')
-		rv = r.readlines()
-		r.close()
-		if rv[0].strip()!=versione:
-			aggiornaversione(trad("nuovaversionedisponibile")+" : "+rv[0],rv[1])
+	
+	#questo scarica il file, ma va sostituito con una funzione che apra e basta. Pensavo di far salvare in un file can.xml nella home, come l'originale
+	#if os.path.exists(homedir+'versione.txt')==False:
+		#download("http://ubuntuwin.altervista.org/fileadmin/user_upload/ubuntuwintv/versione.txt","Sto verificando l'esistenza di aggiornamenti","versione.txt")
+		#r = open (homedir+'versione.txt','r')
+		#rv = r.readlines()
+		#r.close()
+		#if rv[0].strip()!=versione:
+			#aggiornaversione(trad("nuovaversionedisponibile")+" : "+rv[0],rv[1])
 
 			###try:
 	if os.path.exists(homedir+"can.xml")==False:
-		download("http://ubuntuwin.altervista.org/fileadmin/user_upload/ubuntuwintv/can.xml","Sto scaricando i canali di UBUNTUWINTV","can.xml")
+		#download("http://ubuntuwin.altervista.org/fileadmin/user_upload/ubuntuwintv/can.xml","Sto scaricando i canali di UBUNTUWINTV","can.xml")
+		print "Errore, inserire una file can.xml nella home directory"
+		
 	if os.path.exists(homedir+"can.xml")==True:
 		doc = xml.dom.minidom.parse(homedir+"can.xml")
 		for nodi in doc.getElementsByTagName("menu"):
